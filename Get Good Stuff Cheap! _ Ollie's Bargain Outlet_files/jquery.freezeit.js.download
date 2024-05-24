@@ -1,0 +1,76 @@
+/*
+	--------------------------------
+	FreezeIt
+	-lock an element to fixed position after scrolling
+	-semi-parallax effect
+	Copyright (c) 2012 Mike Avello
+	Dual licensed under the MIT and GPL licenses:
+	http://www.opensource.org/licenses/mit-license.php
+	http://www.gnu.org/licenses/gpl.html
+	--------------------------------	
+*/
+(function($){
+	$.fn.freezeIt = function(settings){
+		
+		return this.each(function() {
+			var target = $(this);
+			var opts = optionsHandler(target, settings);
+		});
+		
+		function optionsHandler(target, settings) {
+			if (settings === undefined || settings === null) {
+				settings = {};
+			};
+			
+			if (settings.constructor === String) {		
+				switch(settings) {
+					case 'reset':
+						settings = target.data("freezeIt.opts");
+						reFreeze(target, settings);
+						return false;
+					default:
+				};
+				return settings;
+			};	
+									
+			var opt = $.extend({
+				stopBefore: 0
+			}, settings);
+			
+			target.data("freezeIt.opts", settings);
+			
+			initFreeze(target, opt);
+		};
+				
+		function initFreeze(target, opt) {
+			var element = target;
+			var distanceTop = element.offset().top;
+
+			if ( opt.stopBefore ) {
+				var bottom = $(opt.stopBefore).offset().top - element.outerHeight(true) - 10;
+			} else {
+				var bottom = 200000;
+			};
+
+			$(window).scroll(function(){	
+				if ( $(window).scrollTop() > distanceTop && $(window).scrollTop() <= bottom ) {
+					//element.css({'position':'fixed', 'top':'0px'});
+					element.addClass("stickyFixed").removeClass("stickyBottom stickyTop");
+				} else if ( $(window).scrollTop() > bottom ) {
+					//element.css({'position':'absolute', "top":"auto", "bottom":"0px"});
+					element.addClass("stickyBottom").removeClass("stickyFixed stickyTop");
+				} else {
+					//element.css({'position':'absolute'});
+					element.addClass("stickyTop").removeClass("stickyBottom stickyFixed");
+				};
+			});	
+		};
+		
+		function reFreeze(target, opt) {
+			$(window).unbind();
+			target.removeAttr("style");
+			initFreeze(target, opt);
+		};	
+
+	};
+})(jQuery);

@@ -1,0 +1,9 @@
+﻿var _sj = _sj || [];
+(function () {
+    var sj = document.createElement('script');
+    sj.type = 'text/javascript';
+    sj.async = true;
+      sj.src = '//cdn.sajari.com/embed/1/loader.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(sj, s);
+})();

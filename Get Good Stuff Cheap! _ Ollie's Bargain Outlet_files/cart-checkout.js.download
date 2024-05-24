@@ -1,0 +1,56 @@
+(function (cart, $, undefined) {
+
+    cart.init = function() {
+        // initializes cart functionality
+        $("div.cartSupport .accordion").accordion({ header: "h3" });
+        $('div.cartSupport .supportAccordion').accordion();
+
+        $('.costSummary').on("click", "a.enterZip, .icon-close", function(e) {
+            e.preventDefault();
+            $(this).closest(".costRow").find("div.shipData").toggle();
+        });
+		
+        $(".slideCartRail").each(function() {
+            //var cartSummary = $(".slideCart");
+			var cartSummary = $(".slideCart").freezeIt({
+				stopBefore: ".slideRailEnd"
+			});
+			
+            $(".slideCartCompanion, .slideCartRail").matchHeights({
+                minHeight: cartSummary.outerHeight(true)
+            });
+        });
+		
+        cart.initCartTools();
+    };
+
+    cart.initCartTools = function() {
+        $(".cartTools").on("click", "a.trigger", function(e) {
+            e.preventDefault();
+            cart.hideAllCartTools();
+            $(this).next(".popup").toggleClass("showTool");
+        }).on("click", ".icon-close", function(e) {
+            e.preventDefault();
+            cart.hideAllCartTools();
+        });
+    };
+
+    cart.showCartTool = function(id) {
+        cart.hideAllCartTools();
+        $("#"+id).addClass("showTool");
+    };
+
+    cart.hideAllCartTools = function(id) {
+        $(".cartTools .popup").removeClass("showTool");
+    };
+
+
+}(window.cart = window.cart || {}, jQuery));
+
+
+jQuery(function ($) {
+    // Initialize mainNavigation on dom ready
+    cart.init();
+
+    BaseModule.addModuleRebindFunction("cart.", cart.init);
+});
