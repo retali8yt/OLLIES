@@ -1,1 +1,0 @@
-((e,t)=>{if(document.getElementById(t))return;const d=document.createElement("script");d.src="https://cdn.sajari.com/embed/2.24.0/bundle.js",d.id=t,d.async=!0,document.body.appendChild(d)})(0,"sajari-widgets");

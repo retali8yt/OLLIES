@@ -1,6 +1,0 @@
-# HTTrack Website Copier Cookie File
-# This file format is compatible with Netscape cookies
-.ollies.us	TRUE	/	FALSE	1999999999	visid_incap_657719	DwY5VO6XSp+I8DQn0cgowujOT2YAAAAAQUIPAAAAAAAxA+TPHpQkmDYFSp55VUia
-.ollies.us	TRUE	/	FALSE	1999999999	incap_ses_1140_657719	yLSUdFJJVDbenk4SBhjSD+jOT2YAAAAALoJ/IIpcy1PC03pc1a1xOA==
-www.ollies.us	TRUE	/	FALSE	1999999999	SameSite	None
-
